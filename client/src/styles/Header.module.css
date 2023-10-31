@@ -1,0 +1,31 @@
+.horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 40px;
+    
+}
+
+ 
+  
+  .container {
+    display: flex;
+  }
+  
+  .container button {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .container button:hover {
+    background-color: #ddd;
+  }
+  
+  .logo{
+    margin-right: auto;
+  }

@@ -1,0 +1,30 @@
+.formContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.editProfileForm,
+.passwordChangeForm {
+  background-color: #272525;
+  border-radius: 10px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+}
+
+.submitButton {
+  align-self: flex-end;
+}

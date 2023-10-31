@@ -1,0 +1,599 @@
+openapi: 3.0.3
+info:
+  title: TechBuddy API
+  description: TechBuddy API is used for managing the TechBuddy entities
+  version: 1.0.0
+paths:
+  # Bookmarks
+  /bookmarks:
+    get:
+      summary: Retrive a list of bookmarks
+      description: Returns a list of bookmarks
+      responses:
+        "200":
+          description: List of bookmarks 
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Bookmark'
+    post:
+      summary: Create a new bookmark
+      description: Creates a new bookmark
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookmarkInput'
+      responses:
+        "201":
+          description: Created 
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Bookmark'
+        "400":
+          description: Bad Request
+  /bookmarks/{bookmarkId}:
+    get:
+      summary: Retrives a single post
+      description: Returns a list of bookmarks
+      parameters:
+        - in: path
+          name: bookmarkId
+          schema:
+            type: integer
+          required: true
+          description: ID of the blog post to retrive
+      responses:
+        "200":
+          description: List of bookmarks 
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Bookmark' 
+    delete:
+      summary: Delete a bookmark
+      description: Delete an existing bookmark
+      parameters:
+        - in: path
+          name: bookmarkId
+          schema:
+            type: integer
+          required: true
+          description: ID of the bookmark to delete
+      responses:
+        204:
+          description: No content
+        404: 
+          description: Not found
+      
+  # Posts
+  /posts:
+    get:
+      summary: Retrives a list of blog posts
+      description: Returns a list of blog posts
+      responses:
+        "200":
+          description: List of blog posts 
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Post' 
+    post:
+      summary: Create a new blog post
+      description: Creates a new blog post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+             $ref: '#/components/schemas/PostInput'
+      responses:
+        "201":
+          description: Created 
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Post'
+        "400":
+          description: Bad Request
+  /posts/{postId}:
+    get:
+      summary: Retrive a single blog post
+      description: Returns a single blog post by ID
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: integer
+          required: true
+          description: ID of the blog post to retrive
+      responses:
+        "200":
+          description: List of blog posts 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        "404":
+          description: Not Found
+    put:
+      summary: Update a blog post
+      description: Update an existing blog post
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: integer
+          required: true
+          description: ID of the blog post to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostInput'
+      responses:
+        "200":
+          description: Updated 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        "404":
+          description: Not Found
+    delete:
+      summary: Delete a blog post
+      description: Delete an existing blog post
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: integer
+          required: true
+          description: ID of the blog post to delete
+      responses:
+        204:
+          description: No content
+        404: 
+          description: Not found
+          
+  # Developers
+  /developers:
+    get:
+      summary: Retrives a list of developers
+      description: Returns a list of developers
+      responses:
+        "200":
+          description: List of developers 
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Developer' 
+    post:
+      summary: Creates a new developer
+      description: Creates a new developer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+             $ref: '#/components/schemas/DeveloperInput'
+      responses:
+        "201":
+          description: Created 
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Developer'
+        "400":
+          description: Bad Request
+  /developers/{developerId}:
+    get:
+      summary: Retrive a single developer
+      description: Returns a developer by Id
+      parameters:
+        - in: path
+          name: developerId
+          schema:
+            type: integer
+          required: true
+          description: ID of the developer
+      responses:
+        "200":
+          description: List of developer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Developer'
+        "404":
+          description: Not Found
+    put:
+      summary: Update a developer 
+      description: Update an existing developer
+      parameters:
+        - in: path
+          name: developerId
+          schema:
+            type: integer
+          required: true
+          description: ID of the developer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeveloperInput'
+      responses:
+        "200":
+          description: Updated 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Developer'
+        "404":
+          description: Not Found
+    delete:
+      summary: Delete a developer
+      description: Delete an existing developer
+      parameters:
+        - in: path
+          name: developerId
+          schema:
+            type: integer
+          required: true
+          description: ID of the developer
+      responses:
+        204:
+          description: No content
+        404: 
+          description: Not found
+          
+  # Analytics
+  /analytics/{developerId}:
+    get: 
+      summary: Retrive the analytics of developer
+      description: Returns a developer by Id
+      parameters:
+        - in: path
+          name: developerId
+          schema:
+            type: integer
+          required: true
+          description: ID of the developer
+      responses:
+        "200":
+          description: List of developer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytic'
+        "404":
+          description: Not Found
+    
+  # Challenges
+  /challenges:
+    get:
+      summary: Retrives a list of challenges
+      description: Returns a list of challenges
+      responses:
+        "200":
+          description: List of challenges 
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Challenge' 
+    post:
+      summary: Create a new challenge
+      description: Creates a new challenge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChallengeInput'
+      responses:
+        "201":
+          description: Created 
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Challenge'
+        "400":
+          description: Bad Request
+  /challenges/{challengeId}:
+    get:
+      summary: Retrive a challenge
+      description: Returns a challenge
+      parameters:
+        - in: path
+          name: challengeId
+          schema:
+            type: integer
+          required: true
+          description: ID of the challenge
+      responses:
+        "200":
+          description: One challenge 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Challenge'
+        "404":
+          description: Not Found
+    put:
+      summary: Update a challenge
+      description: Update an existing challenge
+      parameters:
+        - in: path
+          name: challengeId
+          schema:
+            type: integer
+          required: true
+          description: ID of the challenge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChallengeInput'
+      responses:
+        "200":
+          description: Updated 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Challenge'
+        "404":
+          description: Not Found
+    delete:
+      summary: Delete a Challenge by ID
+      description: Delete a challenge
+      parameters:
+        - in: path
+          name: challengeId
+          schema:
+            type: integer
+          required: true
+          description: ID of the challenge to delete
+      responses:
+        204:
+          description: No content
+        404: 
+          description: Not found
+          
+  # Submissions
+  /submissions/{submissionId}:
+    get:
+      summary: Retrives the list of submissions
+      description: Returns a list of submissions
+      parameters:
+        - in: path
+          name: submissionId
+          schema:
+            type: integer
+          required: true
+          description: ID of the submission
+      responses:
+        "200":
+          description: List of submissions 
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Submission' 
+  
+  
+  
+components:
+  schemas:
+    Bookmark:
+      type: object
+      properties:
+       bookmarkId:
+         type: integer
+         description: Bookmark object identifier
+         example: 1
+       post:
+        type: object
+        description: Bookmark-post
+        example: {
+          postId: 1,
+          postTitle: "My First Post",
+          postDescription : "Hello World!",
+          author: "Rajavi",
+          date: <2023-3-22>,
+          likes: 1,
+          views: 10,
+          tags: ["#java", "#python"]
+        }
+       developerId:
+        type: integer
+        description: Developer's ID who saved post
+        example: 1
+    BookmarkInput:
+      type: object
+      properties: 
+        postTitle:
+          type: string
+        postDescription: 
+          type: string
+        author:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+      required:
+        - postTitle
+        - postDescription
+        - author
+        - tags
+    Post:
+      type: object
+      properties:
+        postId: 
+          type: integer
+          description: Post identifier
+          example: 1
+        postTitle:
+          type: string
+          description: Title of the post
+          example: "Post Title"
+        postDescription: 
+          type: string
+          description: Describe the post
+          example: "Post Description"
+        author:
+          type: string
+          description: Author of the post
+          example: "rajavi"
+        date:
+          type: string
+          format: date-time
+        likes:
+          type: integer
+          description: Total likes of the post
+          example: 10
+        views:
+          type: integer
+          description: Total views of the post
+          example: 100
+        tags:
+          type: array
+          description: Tags of the post
+          items: 
+            type: string
+            example: ["#java", "#html"]
+    PostInput:
+      type: object
+      properties: 
+        postTitle:
+          type: string
+        postDescription: 
+          type: string
+        author:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+      required:
+        - postTitle
+        - postDescription
+        - author
+        - tags
+    Developer:
+      type: object
+      properties: 
+        developerId:
+          type: integer
+          description: Developer identifier
+          example: 1
+        developerName:
+          type: string
+          description: Developer Name
+          example: "Rohan"
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+        quiz:
+          type: integer
+        level:
+          type: string
+    DeveloperInput:
+      type: object
+      properties:
+        developerName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - developerName
+        - email
+        - password
+    Analytic:
+      type: object
+      properties:
+        developerId:
+          type: integer
+          example: 1
+        analytics:
+          type: object
+          description: Analytics Summary
+          example: {
+            likes: 1,
+            views: 10,
+            share: 3
+          }
+    Challenge:
+      type: object
+      properties:
+        challengeId:
+          type: integer
+          description: Challenge identifier
+          example: 101
+        description:
+          type: string
+          description: Challenge description
+          example: "This is my challenge description"
+        technology:
+          type: array
+          description: Tags of the language
+          items: 
+            type: string
+            example: ["#java", "#html"]
+        registeredBy:
+          type: array
+          description: Registered 
+          items: 
+            type: string
+            example: ["dev-1", "dev-2"]
+    ChallengeInput:
+      type: object
+      properties: 
+        description:
+          type: string
+        languages:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+      required:
+        - description
+        - languages
+        - tags
+    Submission:
+      type: object
+      properties:
+        submissionBy:
+          type: array
+          description: Tags of the post
+          items: 
+            type: string
+            example: ["Dev-1", "Dev-2"]
+        author:
+          type: string
+          example: "Kruthi"
+        filemetaData:
+          type: string
+          example: "code.txt"
+        
+        
